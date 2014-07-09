@@ -1,0 +1,47 @@
+﻿<div id="divSearchHome" ng-controller="ctrlrPlants">
+    <ul id="ulPlants" ng-controller="ctrlrTicketDatePicker">
+        <li>
+            <label id="lblPlantName" for="ddlPlants">Plant:</label>
+            <select id="ddlPlants" name="ddlPlants" data-ng-model="ngmPlant"
+                    ng-options="plant for plant in plants">
+                <option value="">-- Choose Plants --</option>
+            </select>
+        </li>
+        <li>
+            <label id="lblTicketDate" for="txtTicketDate">Ticket Date:</label>
+            <input id="txtTicketDate" type="text" class="inputCalendar" ng-model="ngmTicketDate"
+                    datepicker-popup="{{format}}" show-weeks="false"  is-open="opened" close-text="Close" />
+
+
+                <button id="btnOpenCalendar" type="button" class="btnCalendar" ng-click="open($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+        </li>
+        <!--
+                        <li>
+                            <label id="lblLoadCode" for="txtLoadCode">Load Code:</label>
+                            <input id="txtLoadCode" name="txtLoadCode" type="text" ng-model="ngmLoadCodeVal" />
+                        </li>
+        -->
+        <li>
+            <label id="lblLocalTicketNum" for="txtLocalTicketNum">Local Ticket Number:</label>
+            <input id="txtLocalTicketNum" name="txtLocalTicketNum" type="text" ng-model="ngmLocalTicketNum" />
+        </li>
+        <li>
+            <label id="lblDispTicketNum" for="txtDispTicketNum">Dispatch&nbsp;Ticket&nbsp;Number:</label>
+            <input id="txtDispTicketNum" name="txtDispTicketNum" type="text" ng-model="ngmDispTicketNum" />
+        </li>
+        <li>
+            <br />
+            <button id="btnSearch" name="btnSearch" class="btnProdPerfHome" type="button"
+                    ng-controller="ctrlrSearch" ng-click="ticketSearch(ngmPlant, ngmTicketDate)">
+                Search
+            </button>
+
+            <button id="btnClear" name="btnClear" class="btnProdPerfHome" type="button"
+                    ng-controller="ctrlrClear" ng-click="clearFilters()">
+                Clear
+            </button>
+        </li>
+    </ul>
+</div>
