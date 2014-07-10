@@ -4,7 +4,7 @@
 
 angular.module('myApp.controllers', ['ui.bootstrap'])
     .controller('ngcMain',
-        function($rootScope, $scope, $log, $location, $route, $http) {
+        function($rootScope, $scope, $log) {
             $scope.mppHeader = "Production Performance";
             $scope.ngsHomeH1 =
                 function() {
@@ -27,16 +27,10 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                         $scope.plants = data;
                     }
                 );
-
-            
-            /*
-             $scope.myPlant = $routeParams.myPlant;
-             $scope.myDate = $routeParams.myDate;
-             */
         }
     )
     .controller('ngcTicketDatePicker',
-        function($rootScope, $scope, $log, $location, $route, $http) {
+        function($rootScope, $scope, $log) {
             $scope.today =
                 function() {
                     $scope.ngmTicketDate = new Date();
@@ -65,19 +59,12 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                         .success
                         (
                             function(data) {
-                                $scope.tickets = data;
-                                alert('Length: ' + $scope.tickets.length);
-                                alert('TicketCode 0:' + $scope.tickets[0].DispatchTicketCode);
                                 dataService.setTickets(data);
+                                $scope.tickets = data;
+                                $location.url('/prodPerfSumm');
                             }
                         );
-                    $location.url('/prodPerfSumm');
                 };
-
-            /*
-             $scope.myPlant = $routeParams.myPlant;
-             $scope.myDate = $routeParams.myDate;
-            */
         }
     )
 
@@ -86,13 +73,11 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
         function ($rootScope, $scope, $filter, $log, $location, dataService) {
             $scope.tickets = [];
             $scope.tickets = dataService.getTickets();
-            alert($scope.tickets[0].DispatchTicketCode);
-/*            $location.path('/prodPerfSumm');*/
         }
     )
 
         .controller('ngcClear',
-    function ($rootScope, $scope, $log, $location, $route, $http) {
+    function ($rootScope, $scope, $log, $location, $route) {
         $scope.clearFilters =
             function () {
                 $route.reload();
