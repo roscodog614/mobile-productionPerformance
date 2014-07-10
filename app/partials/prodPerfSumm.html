@@ -1,0 +1,18 @@
+﻿<div ng-controller="ngcplants">
+    <table>
+        <thead>
+            Local Ticket #
+            Dispatch Ticket #
+        </thead>
+        <tbody>
+            <tr ng-repeat="ticket in tickets">
+                <td width=" 15%">
+                    {{ticket.LocalTicketCode}}
+                </td>
+                <td width="15%">
+                    {{ticket.DispatchTicketCode}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

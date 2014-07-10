@@ -2,12 +2,12 @@
 
 /* Controllers */
 
-    angular.module('myApp.controllers', ['ui.bootstrap'])
-    .controller('ctrlrMain',
-        function ($rootScope, $scope, $log, $location, $route, $http) {
+angular.module('myApp.controllers', ['ui.bootstrap'])
+    .controller('ngcMain',
+        function($rootScope, $scope, $log, $location, $route, $http) {
             $scope.mppHeader = "Production Performance";
             $scope.ngsHomeH1 =
-                function () {
+                function() {
                     return {
                         background: "green",
                         color: "white",
@@ -16,34 +16,51 @@
                 };
         }
     )
-    .controller('ctrlrPlants',
-        function ($rootScope, $scope, $log, $location, $route, $http) {
-            $scope.plants =
-                function () {
-                    $http.get('http://oh-devcb-d05:9330/GetAllPlants')
+    .controller('ngcPlants',
+        function($rootScope, $scope, $log, $location, $route, $http) {
+            $scope.plants = [];
+
+            $http.get('http://oh-devcb-d05:9330/GetAllPlants')
+                .success
+                (
+                    function(data) {
+                        $scope.plants = data;
+                    }
+                );
+
+            $scope.tickets = [];
+            $scope.tickets =
+                function(selectedPlant, selectedDate) {
+                    var formattedDate = (selectedDate.getMonth() + 1) + '/' + selectedDate.getDate() + '/' + selectedDate.getFullYear();
+
+                    $http.get('http://oh-devcb-d05:9330/GetPlantTickets?plant=' + selectedPlant + '&date=' + formattedDate)
                         .success
                         (
-                            function(data)
-                            {
-                                $scope.plants = data;
+                            function(data) {
+                                $scope.tickets = data;
+                                alert('Length: ' + $scope.tickets.length);
+                                alert('TicketCode 0:' + $scope.tickets[0].DispatchTicketCode);
                             }
                         );
+                    $location.path('/prodPerfSumm');
                 };
-
-            $scope.ngmPlant = $scope.plants();
+            
+            /*
+             $scope.myPlant = $routeParams.myPlant;
+             $scope.myDate = $routeParams.myDate;
+             */
         }
     )
-
-    .controller('ctrlrTicketDatePicker',
-        function ($rootScope, $scope, $log, $location, $route, $http) {
+    .controller('ngcTicketDatePicker',
+        function($rootScope, $scope, $log, $location, $route, $http) {
             $scope.today =
-                function () {
+                function() {
                     $scope.ngmTicketDate = new Date();
                 };
             $scope.today();
 
             $scope.open =
-                function ($event) {
+                function($event) {
                     $event.preventDefault();
                     $event.stopPropagation();
 
@@ -53,7 +70,45 @@
             $scope.format = 'MM/dd/yyyy';
         }
     )
-    .controller('ctrlrClear',
+/*
+    .controller('ngcSearch',
+        function($rootScope, $scope, $log, $location, $route, $routeParams, $http) {
+            $scope.tickets = [];
+            $scope.tickets =
+                function(selectedPlant, selectedDate) {
+                    alert($scope.ngmPlant);
+                    var formattedDate = (selectedDate.getMonth() + 1) + '/' + selectedDate.getDate() + '/' + selectedDate.getFullYear();
+
+                    $http.get('http://oh-devcb-d05:9330/GetPlantTickets?plant=' + selectedPlant + '&date=' + formattedDate)
+                        .success
+                        (
+                            function(data) {
+                                $scope.tickets = data;
+                                alert('Length: ' + $scope.tickets.length);
+                                alert('TicketCode 0:' + $scope.tickets[0].DispatchTicketCode);
+                            }
+                        );
+                };
+            alert('Length2: ' + $scope.tickets.length);
+            $location.path('/prodPerfSumm');
+            /*
+             $scope.myPlant = $routeParams.myPlant;
+             $scope.myDate = $routeParams.myDate;
+             #1#
+        }
+    )
+*/
+
+
+/*
+    .controller('ngcProdPerfSumm',
+        function ($rootScope, $scope, $filter, $log, $location, $routeParams, $http) {
+            alert($scope.ngmPlant);
+        }
+    )
+*/
+
+        .controller('ngcClear',
     function ($rootScope, $scope, $log, $location, $route, $http) {
         $scope.clearFilters =
             function () {
@@ -62,45 +117,4 @@
     }
 )
 
-    .controller('ctrlrSearch',
-        function ($rootScope, $scope, $filter, $log, $location, $routeParams, $http) {
-            $scope.ticketSearch =
-                function (plant, ticketDate) {
-                    var formattedDate = (ticketDate.getMonth() + 1) + '/' + ticketDate.getDate() + '/' + ticketDate.getFullYear();
-
-                    alert(plant + ', ' + formattedDate);
-                    alert("http://oh-devcb-d05:9330/GetPlantTickets?plant=" + plant + "&date=" + formattedDate);
-
-
-                    /*                    $location.path("/prodPerf");*/
-                    /*
-                     $scope.selectedPlant = $routeParams.selectedPlant;
-                     $scope.selectedDate = $routeParams.selectedDate;
-                     */
-
-                    /*$location.path("/performanceSummary/"+selectedPlant+formattedDate);*/
-
-                    /* alert(newPath);*/
-                    /*
-                     alert('http://oh-devcb-d05:9330/GetPlantTickets?plant=ngmPlant&date=ticketDate');
-                     .success(
-                     function(data)
-                     {
-                     $scope.ticketSummary = data;
-                     alert($scope.ticketSummary);
-                     }
-                     );
-                     */
-                };
-        }
-    )
-
-    .controller('ctrlrPerfSum',
-        function ($rootScope, $scope, $log, $location, $route, $routeParams, $http) {
-            /*
-             $scope.myPlant = $routeParams.myPlant;
-             $scope.myDate = $routeParams.myDate;
-             */
-        }
-    )
 ;
