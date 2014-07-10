@@ -33,7 +33,7 @@ angular.module
                 '/prodPerfSumm',
                 {
                     templateUrl: 'partials/prodPerfSumm.html',
-                    controller: 'ngcPlants'
+                    controller: 'ngcProdPerfSumm'
                 }
             );
 

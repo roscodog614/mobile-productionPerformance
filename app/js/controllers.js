@@ -28,22 +28,6 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                     }
                 );
 
-            $scope.tickets = [];
-            $scope.tickets =
-                function(selectedPlant, selectedDate) {
-                    var formattedDate = (selectedDate.getMonth() + 1) + '/' + selectedDate.getDate() + '/' + selectedDate.getFullYear();
-
-                    $http.get('http://oh-devcb-d05:9330/GetPlantTickets?plant=' + selectedPlant + '&date=' + formattedDate)
-                        .success
-                        (
-                            function(data) {
-                                $scope.tickets = data;
-                                alert('Length: ' + $scope.tickets.length);
-                                alert('TicketCode 0:' + $scope.tickets[0].DispatchTicketCode);
-                            }
-                        );
-                    $location.path('/prodPerfSumm');
-                };
             
             /*
              $scope.myPlant = $routeParams.myPlant;
@@ -70,13 +54,11 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
             $scope.format = 'MM/dd/yyyy';
         }
     )
-/*
-    .controller('ngcSearch',
-        function($rootScope, $scope, $log, $location, $route, $routeParams, $http) {
+    .controller('ngcGetPlantTickets',
+        function ($rootScope, $scope, $log, $location, $route, $routeParams, $http, dataService) {
             $scope.tickets = [];
             $scope.tickets =
                 function(selectedPlant, selectedDate) {
-                    alert($scope.ngmPlant);
                     var formattedDate = (selectedDate.getMonth() + 1) + '/' + selectedDate.getDate() + '/' + selectedDate.getFullYear();
 
                     $http.get('http://oh-devcb-d05:9330/GetPlantTickets?plant=' + selectedPlant + '&date=' + formattedDate)
@@ -86,27 +68,28 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                                 $scope.tickets = data;
                                 alert('Length: ' + $scope.tickets.length);
                                 alert('TicketCode 0:' + $scope.tickets[0].DispatchTicketCode);
+                                dataService.setTickets(data);
                             }
                         );
+                    $location.url('/prodPerfSumm');
                 };
-            alert('Length2: ' + $scope.tickets.length);
-            $location.path('/prodPerfSumm');
+
             /*
              $scope.myPlant = $routeParams.myPlant;
              $scope.myDate = $routeParams.myDate;
-             #1#
+            */
         }
     )
-*/
 
 
-/*
     .controller('ngcProdPerfSumm',
-        function ($rootScope, $scope, $filter, $log, $location, $routeParams, $http) {
-            alert($scope.ngmPlant);
+        function ($rootScope, $scope, $filter, $log, $location, dataService) {
+            $scope.tickets = [];
+            $scope.tickets = dataService.getTickets();
+            alert($scope.tickets[0].DispatchTicketCode);
+/*            $location.path('/prodPerfSumm');*/
         }
     )
-*/
 
         .controller('ngcClear',
     function ($rootScope, $scope, $log, $location, $route, $http) {
