@@ -6,7 +6,7 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
-    .service('dataService',
+    .service('ticketDataService',
         function() {
             var resultTickets = [];
             this.setTickets = function(tickets) {
@@ -16,5 +16,16 @@ angular.module('myApp.services', [])
             this.getTickets = function() {
                 return resultTickets;
             }
+        })
+        .service('detailDataService',
+        function () {
+            var resultDetails = [];
+            this.setDetails = function (details) {
+                resultDetails = details;
+            };
+
+            this.getDetails = function () {
+                return resultDetails;
+            }
         });
-  value('version', '0.1');
+

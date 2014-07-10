@@ -17,6 +17,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include="app\partials\home.html" />
+    <Content Include="app\partials\prodPerfDetails.html" />
     <Content Include="app\partials\prodPerfSumm.html" />
     <Content Include="bower.json" />
     <Content Include="bower_components\angular-bootstrap\.bower.json" />

@@ -1,23 +1,27 @@
-﻿<div ng-controller="ngcProdPerfSumm">
-    <table>
-        <thead>
+﻿<div id="divProdPerfSum" ng-controller="ngcProdPerfSumm">
+    <table id="tblSummary">
+        <thead id="thSummary">
             <tr>
-                <td width="15%">
-                    Local Ticket #
-                </td>
-                <td width="15%">
-                    Dispatch ticket #
-                </td>
+                <td> Plant </td>
+                <td> Local Ticket # </td>
+                <td> Dispatch Ticket # </td>
+                <td> Mix Design </td>
+                <td> Start Time </td>
+                <td> End Time </td>
+                <td> Truck </td>
             </tr>
         </thead>
-        <tbody>
-            <tr ng-repeat="ticket in tickets">
-                <td width="15%">
-                    {{ticket.LocalTicketCode}}
+        <tbody id="tbSummary">
+            <tr id="trTicketRepeater" ng-repeat="ticket in tickets">
+                <td id="tdPlant">{{ticket.Plant}}</td>
+                <td id="tdLocalTicketNum">
+                    <a id="lnkProdPerfDetails" href="" ng-controller="ngcGetDetails" ng-click="details(ticket.DispatchTicketCode)">{{ticket.LocalTicketCode}}</a>
                 </td>
-                <td width="15%">
-                    {{ticket.DispatchTicketCode}}
-                </td>
+                <td id="tdDispatchTicketNum">{{ticket.DispatchTicketCode}}</td>
+                <td id="tdMixDesign">{{ticket.Description}}</td>
+                <td id="tdStartTime">{{ticket.StartTime}}</td>
+                <td id="tdEndTime">{{ticket.EndTime}}</td>
+                <td id="tdTruck">{{ticket.Truck}}</td>
             </tr>
         </tbody>
     </table>
