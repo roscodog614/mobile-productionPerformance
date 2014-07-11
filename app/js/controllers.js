@@ -54,7 +54,6 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
     )
     .controller('ngcGetPlantTickets',
         function ($rootScope, $scope, $log, $location, $route, $routeParams, $http, ticketDataService) {
-            $scope.tickets = [];
             $scope.tickets =
                 function (selectedPlant, selectedDate) {
                     $log.log('Getting tickets for specified date');
@@ -88,13 +87,11 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
     )
     .controller('ngcProdPerfSumm',
         function ($rootScope, $scope, $filter, $log, $location, ticketDataService) {
-            $scope.tickets = [];
             $scope.tickets = ticketDataService.getTickets();
         }
     )
     .controller('ngcGetDetails',
         function ($rootScope, $scope, $log, $location, $route, $routeParams, $http, detailDataService) {
-            $scope.details = [];
             $scope.details = 
                 function (selectedTicket) {
                     $log.log('Getting production performance details for selected date');
@@ -121,8 +118,10 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
 
     .controller('ngcProdPerfDetails',
         function ($rootScope, $scope, $filter, $log, $location, detailDataService) {
-            $scope.tickets = [];
-            $scope.tickets = detailDataService.getDetails();
+
+            $scope.details = detailDataService.getDetails();
+            $log.log('details loaded: ' + $scope.details);
+
         }
     )
     ;
