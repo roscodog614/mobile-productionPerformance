@@ -1,6 +1,6 @@
 ﻿<div id="divProdPerfDetails" ng-controller="ngcProdPerfDetails">
-    <table id="tblDetails">
-        <thead id="thDetails">
+    <table id="tblDetails" class="tblBorder">
+        <thead id="thDetails" class="tblHeader">
             <tr>
                 <td> Plant </td>
                 <td> Local Ticket # </td>
@@ -17,16 +17,16 @@
                 <td> Slump </td>
             </tr>
         </thead>
-        <tbody id="tbDetails">
-            <tr id="trDetailsRepeater" >
+        <tbody id="tbDetails" class="tblBody">
+            <tr id="trDetailsRepeater">
                 <td id="tdPlant"> {{details.Location.Plant}} </td>
                 <td id="tdLocalTicketNum"> {{details.LoadInfo.LocalTicketCode}} </td>
                 <td id="tdDispatchTicketNum"> {{details.LoadInfo.DispatchTicketCode}} </td>
                 <td id="tdMixDesign"> {{details.LoadInfo.Description}} </td>
                 <td id="tdTotalBatched"> {{details.Produced.Quantity.Value}} {{details.Produced.Quantity.UnitOfMeasure}} </td>
                 <td id="tdTotalBatches"> {{details.LoadInfo.TotalBatches}} </td>
-                <td id="tdStartTime"> {{details.LoadInfo.ActualStartTime}} </td>
-                <td id="tdEndTime"> {{details.LoadInfo.ActualEndTime}} </td>
+                <td id="tdStartTime"> {{details.LoadInfo.ActualStartTime | date : 'MM/dd/yyyy hh:mm:ss'}} </td>
+                <td id="tdEndTime"> {{details.LoadInfo.ActualEndTime | date : 'MM/dd/yyyy hh:mm:ss'}} </td>
                 <td id="tdMixingTime"> {{details.LoadInfo.MixingTime.Value}}  {{details.LoadInfo.MixingTime.UnitOfMeasure}} </td>
                 <td id="tdTruck"> {{details.LoadInfo.Truck.Description}} </td>
                 <td id="tdReturned"> {{details.LoadInfo.Truck.ReturnedConcrete.Quantity}}  {{details.LoadInfo.Truck.ReturnedConcrete.UnitOfMeasure}} </td>
@@ -36,8 +36,8 @@
         </tbody>
     </table>
     <br /><br />
-    <table id="tblMaterials">
-        <thead id="thMaterials">
+    <table id="tblMaterials" class="tblBorder">
+        <thead id="thMaterials" class="tblHeader">
             <tr>
                 <td> Material </td>
                 <td> Target </td>
@@ -46,7 +46,7 @@
                 <td> Moisture </td>
             </tr>
         </thead>
-        <tbody id="tbMaterials">
+        <tbody id="tbMaterials" class="tblBody">
             <tr id="trMaterialsRepeater" ng-repeat="material in details.Consumed">
                 <td id="tdMaterial"> {{material.Material}} </td>
                 <td id="tdTarget"> {{material.FeedTarget.Value}}  {{material.FeedTarget.UnitOfMeasure}} </td>

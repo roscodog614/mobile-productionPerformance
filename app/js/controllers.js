@@ -88,6 +88,11 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
     .controller('ngcProdPerfSumm',
         function ($rootScope, $scope, $filter, $log, $location, ticketDataService) {
             $scope.tickets = ticketDataService.getTickets();
+            /*
+                        startTime = $scope.tickets.StartTime;
+            startTime = (startTime.getMonth() + 1) + '/' + startTime.getDate() + '/' + startTime.getFullYear();
+            $scope.tickets.StartTime = startTime;
+*/
         }
     )
     .controller('ngcGetDetails',

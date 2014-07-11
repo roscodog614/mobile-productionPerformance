@@ -1,6 +1,6 @@
 ﻿<div id="divProdPerfSum" ng-controller="ngcProdPerfSumm">
-    <table id="tblSummary">
-        <thead id="thSummary">
+    <table id="tblSummary" class="tblBorder">
+        <thead id="thSummary" class="tblHeader">
             <tr>
                 <td> Plant </td>
                 <td> Local Ticket # </td>
@@ -11,7 +11,7 @@
                 <td> Truck </td>
             </tr>
         </thead>
-        <tbody id="tbSummary">
+        <tbody id="tbSummary" class="tblBody">
             <tr id="trTicketRepeater" ng-repeat="ticket in tickets">
                 <td id="tdPlant">{{ticket.Plant}}</td>
                 <td id="tdLocalTicketNum">
@@ -19,8 +19,8 @@
                 </td>
                 <td id="tdDispatchTicketNum">{{ticket.DispatchTicketCode}}</td>
                 <td id="tdMixDesign">{{ticket.Description}}</td>
-                <td id="tdStartTime">{{ticket.StartTime}}</td>
-                <td id="tdEndTime">{{ticket.EndTime}}</td>
+                <td id="tdStartTime">{{ticket.StartTime | date : 'MM/dd/yyyy hh:mm:ss'}}</td>
+                <td id="tdEndTime">{{ticket.EndTime | date : 'MM/dd/yyyy hh:mm:ss'}}</td>
                 <td id="tdTruck">{{ticket.Truck}}</td>
             </tr>
         </tbody>

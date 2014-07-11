@@ -54,7 +54,6 @@ input
     float: left;
 }
 
-
 select
 {
     display: inline-block;
@@ -62,4 +61,20 @@ select
     height: 26px;
     float: left;
     margin-left: 2px;
+}
+
+.tblBorder td
+{
+    border: 1px solid black;
+}
+
+.tblHeader tr td
+{
+    padding: 5px;
+    font-weight: bold;
+}
+
+.tblBody tr td
+{
+    padding: 5px;
 }
