@@ -70,11 +70,12 @@ select
 
 .tblHeader tr td
 {
-    padding: 5px;
+    padding: 2px;
     font-weight: bold;
+    text-align: center;
 }
 
 .tblBody tr td
 {
-    padding: 5px;
+    padding: 2px;
 }

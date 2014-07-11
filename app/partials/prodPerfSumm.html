@@ -15,7 +15,9 @@
             <tr id="trTicketRepeater" ng-repeat="ticket in tickets">
                 <td id="tdPlant">{{ticket.Plant}}</td>
                 <td id="tdLocalTicketNum">
-                    <a id="lnkProdPerfDetails" href="" ng-controller="ngcGetDetails" ng-click="details(ticket.DispatchTicketCode)">{{ticket.LocalTicketCode}}</a>
+                    <a id="lnkProdPerfDetails" href="" ng-controller="ngcGetDetails" ng-click="details(ticket.DispatchTicketCode)">
+                        {{ticket.LocalTicketCode}}
+                    </a>
                 </td>
                 <td id="tdDispatchTicketNum">{{ticket.DispatchTicketCode}}</td>
                 <td id="tdMixDesign">{{ticket.Description}}</td>

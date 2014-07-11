@@ -1,34 +1,46 @@
 ﻿<div id="divProdPerfDetails" ng-controller="ngcProdPerfDetails">
-    <table id="tblDetails" class="tblBorder">
-        <thead id="thDetails" class="tblHeader">
+    <table id="tblProdPerfSumm" class="tblBorder">
+        <thead id="thProdPerfSumm" class="tblHeader">
             <tr>
                 <td> Plant </td>
                 <td> Local Ticket # </td>
                 <td> Dispatch Ticket # </td>
                 <td> Mix Design </td>
-                <td> Total Batched </td>
-                <td> Total Batches </td>
                 <td> Start Time </td>
                 <td> End Time </td>
-                <td> Mixing Time </td>
                 <td> Truck </td>
-                <td> Returned </td>
-                <td> Water In Truck </td>
-                <td> Slump </td>
             </tr>
         </thead>
-        <tbody id="tbDetails" class="tblBody">
-            <tr id="trDetailsRepeater">
+        <tbody id="tbProdPerfSumm" class="tblBody">
+            <tr id="trProdPerfSummRepeater">
                 <td id="tdPlant"> {{details.Location.Plant}} </td>
                 <td id="tdLocalTicketNum"> {{details.LoadInfo.LocalTicketCode}} </td>
                 <td id="tdDispatchTicketNum"> {{details.LoadInfo.DispatchTicketCode}} </td>
                 <td id="tdMixDesign"> {{details.LoadInfo.Description}} </td>
-                <td id="tdTotalBatched"> {{details.Produced.Quantity.Value}} {{details.Produced.Quantity.UnitOfMeasure}} </td>
-                <td id="tdTotalBatches"> {{details.LoadInfo.TotalBatches}} </td>
                 <td id="tdStartTime"> {{details.LoadInfo.ActualStartTime | date : 'MM/dd/yyyy hh:mm:ss'}} </td>
                 <td id="tdEndTime"> {{details.LoadInfo.ActualEndTime | date : 'MM/dd/yyyy hh:mm:ss'}} </td>
-                <td id="tdMixingTime"> {{details.LoadInfo.MixingTime.Value}}  {{details.LoadInfo.MixingTime.UnitOfMeasure}} </td>
                 <td id="tdTruck"> {{details.LoadInfo.Truck.Description}} </td>
+            </tr>
+        </tbody>
+    </table>
+    <br /><br />
+    <table id="tblDetails" class="tblBorder">
+        <thead id="thDetails" class="tblHeader">
+            <tr>
+                <td> Total Batches </td>
+                <td> Total Batched </td>
+                <td> Mixing Time </td>
+                <td> Returned </td>
+                <td> Water In Truck </td>
+                <td> Slump </td>
+
+            </tr>
+        </thead>
+        <tbody id="tbDetails" class="tblBody">
+            <tr id="trMaterialsRepeater" ng-repeat="material in details.Consumed">
+                <td id="tdTotalBatches"> {{details.LoadInfo.TotalBatches}} </td>
+                <td id="tdTotalBatched"> {{details.Produced.Quantity.Value}} {{details.Produced.Quantity.UnitOfMeasure}} </td>
+                <td id="tdMixingTime"> {{details.LoadInfo.MixingTime.Value}}  {{details.LoadInfo.MixingTime.UnitOfMeasure}} </td>
                 <td id="tdReturned"> {{details.LoadInfo.Truck.ReturnedConcrete.Quantity}}  {{details.LoadInfo.Truck.ReturnedConcrete.UnitOfMeasure}} </td>
                 <td id="tdWaterInTruck"> {{details.LoadInfo.WaterInTruck.Value}} {{details.LoadInfo.WaterInTruck.UnitOfMeasure}} </td>
                 <td id="tdSlump"> {{details.LoadInfo.Slump.Value}} {{details.LoadInfo.Slump.UnitOfMeasure}} </td>
