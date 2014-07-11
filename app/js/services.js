@@ -8,7 +8,7 @@
 angular.module('myApp.services', [])
     .service('ticketDataService',
         function() {
-            var resultTickets = [];
+            var resultTickets;
             this.setTickets = function(tickets) {
                 resultTickets = tickets;
             };
@@ -19,7 +19,7 @@ angular.module('myApp.services', [])
         })
         .service('detailDataService',
         function () {
-            var resultDetails = [];
+            var resultDetails;
             this.setDetails = function (details) {
                 resultDetails = details;
             };

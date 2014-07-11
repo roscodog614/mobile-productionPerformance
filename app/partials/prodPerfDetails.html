@@ -18,20 +18,20 @@
             </tr>
         </thead>
         <tbody id="tbDetails">
-            <tr id="trDetailsRepeater" ng-repeat="detail in details">
-                <td id="tdPlant"> {{detail.Location.Plant}} </td>
-                <td id="tdLocalTicketNum"> {{detail.LoadInfo.LocalTicketCode}} </td>
-                <td id="tdDispatchTicketNum"> {{detail.LoadInfo.DispatchTicketCode}} </td>
-                <td id="tdMixDesign"> {{detail.LoadInfo.Description}} </td>
-                <td id="tdTotalBatched"> {{detail.Produced.Quantity.Value}} + " " + {{detail.Produced.Quantity.UnitOfMeasure}} </td>
-                <td id="tdTotalBatches"> {{detail.LoadInfo.TotalBatches}} </td>
-                <td id="tdStartTime"> {{detail.LoadInfo.ActualStartTime}} </td>
-                <td id="tdEndTime"> {{detail.LoadInfo.ActualEndTime}} </td>
-                <td id="tdMixingTime"> {{detail.LoadInfo.MixingTime.Value}} + " " + {{detail.LoadInfo.MixingTime.UnitOfMeasure}} </td>
-                <td id="tdTruck"> {{detail.LoadInfo.Truck.Description}} </td>
-                <td id="tdReturned"> {{detail.LoadInfo.Truck.ReturnedConcrete.Quantity}} + " " + {{detail.LoadInfo.Truck.ReturnedConcrete.UnitOfMeasure}} </td>
-                <td id="tdWaterInTruck"> {{detail.LoadInfo.WaterInTruck.Value}} + " " + {{detail.LoadInfo.WaterInTruck.UnitOfMeasure}} </td>
-                <td id="tdSlump"> {{detail.LoadInfo.Slump.Value}} + " " + {{detail.LoadInfo.Slump.UnitOfMeasure}} </td>
+            <tr id="trDetailsRepeater" >
+                <td id="tdPlant"> {{details.Location.Plant}} </td>
+                <td id="tdLocalTicketNum"> {{details.LoadInfo.LocalTicketCode}} </td>
+                <td id="tdDispatchTicketNum"> {{details.LoadInfo.DispatchTicketCode}} </td>
+                <td id="tdMixDesign"> {{details.LoadInfo.Description}} </td>
+                <td id="tdTotalBatched"> {{details.Produced.Quantity.Value}} {{details.Produced.Quantity.UnitOfMeasure}} </td>
+                <td id="tdTotalBatches"> {{details.LoadInfo.TotalBatches}} </td>
+                <td id="tdStartTime"> {{details.LoadInfo.ActualStartTime}} </td>
+                <td id="tdEndTime"> {{details.LoadInfo.ActualEndTime}} </td>
+                <td id="tdMixingTime"> {{details.LoadInfo.MixingTime.Value}}  {{details.LoadInfo.MixingTime.UnitOfMeasure}} </td>
+                <td id="tdTruck"> {{details.LoadInfo.Truck.Description}} </td>
+                <td id="tdReturned"> {{details.LoadInfo.Truck.ReturnedConcrete.Quantity}}  {{details.LoadInfo.Truck.ReturnedConcrete.UnitOfMeasure}} </td>
+                <td id="tdWaterInTruck"> {{details.LoadInfo.WaterInTruck.Value}} {{details.LoadInfo.WaterInTruck.UnitOfMeasure}} </td>
+                <td id="tdSlump"> {{details.LoadInfo.Slump.Value}} {{details.LoadInfo.Slump.UnitOfMeasure}} </td>
             </tr>
         </tbody>
     </table>
@@ -48,9 +48,12 @@
         </thead>
         <tbody id="tbMaterials">
             <tr id="trMaterialsRepeater" ng-repeat="material in details.Consumed">
-                <td></td>
+                <td id="tdMaterial"> {{material.Material}} </td>
+                <td id="tdTarget"> {{material.FeedTarget.Value}}  {{material.FeedTarget.UnitOfMeasure}} </td>
+                <td id="tdActual"> {{material.Consumed.Value}} {{material.Consumed.UnitOfMeasure}} </td>
+                <td id="tdVariance"> {{material.Variance.Value}} {{material.Variance.UnitOfMeasure}} </td>
+                <td id="tdMoisture"> {{material.Moisture.Value}} {{material.Moisture.UnitOfMeasure}} </td>
             </tr>
-            
         </tbody>
     </table>
 </div>
