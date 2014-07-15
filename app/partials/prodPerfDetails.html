@@ -1,4 +1,5 @@
 ﻿<div id="divProdPerfDetails" ng-controller="ngcProdPerfDetails">
+    <h3> Performance Summary </h3>
     <table id="tblProdPerfSumm" class="tblBorder">
         <thead id="thProdPerfSumm" class="tblHeader">
             <tr>
@@ -23,7 +24,8 @@
             </tr>
         </tbody>
     </table>
-    <br /><br />
+    <br />
+    <h3> Load Summary </h3>
     <table id="tblDetails" class="tblBorder">
         <thead id="thDetails" class="tblHeader">
             <tr>
@@ -37,7 +39,7 @@
             </tr>
         </thead>
         <tbody id="tbDetails" class="tblBody">
-            <tr id="trMaterialsRepeater" ng-repeat="material in details.Consumed">
+            <tr id="trMaterialsRepeater">
                 <td id="tdTotalBatches"> {{details.LoadInfo.TotalBatches}} </td>
                 <td id="tdTotalBatched"> {{details.Produced.Quantity.Value}} {{details.Produced.Quantity.UnitOfMeasure}} </td>
                 <td id="tdMixingTime"> {{details.LoadInfo.MixingTime.Value}}  {{details.LoadInfo.MixingTime.UnitOfMeasure}} </td>
@@ -47,7 +49,8 @@
             </tr>
         </tbody>
     </table>
-    <br /><br />
+    <br />
+    <h3> Actuals </h3>
     <table id="tblMaterials" class="tblBorder">
         <thead id="thMaterials" class="tblHeader">
             <tr>

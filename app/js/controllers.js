@@ -2,28 +2,29 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', ['ui.bootstrap'])
+angular.module('myApp.controllers', [])
     .controller('ngcMain',
-        function($rootScope, $scope, $log) {
-            $log.log('Loading web main controller');
+        function($rootScope, $scope, $location, $route, $routeParams, $http, $log, breadcrumbs) {
+            $log.log('Loading main controller');
 
             $scope.mppHeader = "Production Performance";
-            $scope.ngsHomeH1 =
-                function() {
-                    return {
-                        background: "green",
+            $scope.ngsHomeH1 = function () {
+                return {background: "green",
                         color: "white",
                         display: "inline"
-                    };
                 };
-        }
-    )
+
+            };
+
+            $scope.breadcrumbs = breadcrumbs;
+        })
     .controller('ngcPlants',
-        function($rootScope, $scope, $log, $location, $route, $http) {
-            $log.log('Getting plants for plant dropdown');
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log) {
+            $log.log('Loading plants controller');
 
             $scope.plants = [];
 
+            $log.log('Getting plants');
             $http.get('http://oh-devcb-d05:9330/GetAllPlants')
                 .success
                 (
@@ -31,10 +32,12 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                         $scope.plants = data;
                     }
                 );
+
         }
     )
     .controller('ngcTicketDatePicker',
-        function($rootScope, $scope, $log) {
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log) {
+            $log.log('Loading date picker controller');
             $scope.today =
                 function() {
                     $scope.ngmTicketDate = new Date();
@@ -50,12 +53,15 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                 };
 
             $scope.format = 'MM/dd/yyyy';
+
         }
     )
     .controller('ngcGetPlantTickets',
-        function ($rootScope, $scope, $log, $location, $route, $routeParams, $http, ticketDataService) {
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log, ticketDataService, breadCrumbsDataService) {
+            $log.log('Loading get plant tickets controller');
+
             $scope.tickets =
-                function (selectedPlant, selectedDate) {
+                function(selectedPlant, selectedDate) {
                     $log.log('Getting tickets for specified date');
                     try {
                         if (selectedPlant !== 'undefined' && selectedDate !== 'undefined') {
@@ -66,28 +72,33 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
                                 (
                                     function(data) {
                                         ticketDataService.setTickets(data);
-                                        $location.url('/prodPerfSumm');
+                                        breadCrumbsDataService.setBreadCrumbs($scope.breadcrumbs);
+                                        $location.url('/home/prodPerfSumm');
                                     }
                                 );
                         }
-                    }
-                    catch (err) {
+                    } catch (err) {
                         $log.log('Error getting tickets: ' + err);
                     }
                 };
+
         }
     )
     .controller('ngcClear',
-        function ($rootScope, $scope, $log, $location, $route) {
+        function($rootScope, $scope, $location, $route, $routeParams, $http, $log) {
+            $log.log('Loading clear controller');
+
             $scope.clearFilters =
-                function () {
+                function() {
                     $route.reload();
                 };
         }
     )
     .controller('ngcProdPerfSumm',
-        function ($rootScope, $scope, $filter, $log, $location, ticketDataService) {
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log, ticketDataService, breadCrumbsDataService) {
             $scope.tickets = ticketDataService.getTickets();
+            $scope.breadcrumbs = $scope.breadcrumbs + breadCrumbsDataService.getBreadCrumbs();
+
             /*
                         startTime = $scope.tickets.StartTime;
             startTime = (startTime.getMonth() + 1) + '/' + startTime.getDate() + '/' + startTime.getFullYear();
@@ -96,37 +107,36 @@ angular.module('myApp.controllers', ['ui.bootstrap'])
         }
     )
     .controller('ngcGetDetails',
-        function ($rootScope, $scope, $log, $location, $route, $routeParams, $http, detailDataService) {
-            $scope.details = 
-                function (selectedTicket) {
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log, detailDataService, breadCrumbsDataService) {
+            $scope.details =
+                function(selectedTicket) {
                     $log.log('Getting production performance details for selected date');
                     try {
                         if (selectedTicket !== 'undefined') {
 
                             $http.get('http://oh-devcb-d05:9330/GetPlantProductionRecord?DispatchTicketCode=' + selectedTicket)
-                            .success
-                            (
-                                function (data) {
-                                    detailDataService.setDetails(data);
-                                    $location.url('/prodPerfDetails');
-                                }
-                            );
-                        }
-                    }
-                    catch (err) {
+                                .success
+                                (
+                                    function(data) {
+                                        detailDataService.setDetails(data);
+                                        breadCrumbsDataService.setBreadCrumbs($scope.breadcrumbs);
+                                        $location.url('/home/prodPerfSumm/prodPerfDetails');
+                                    }
+                                );
+                        };
+                    } catch (err) {
                         $log.log('Error getting production performance details: ' + err);
-                    }
+                    };
 
-                }
-            }
-        )
-
-    .controller('ngcProdPerfDetails',
-        function ($rootScope, $scope, $filter, $log, $location, detailDataService) {
-
-            $scope.details = detailDataService.getDetails();
-            $log.log('details loaded: ' + $scope.details);
-
+                };
         }
     )
-    ;
+    .controller('ngcProdPerfDetails',
+        function ($rootScope, $scope, $location, $route, $routeParams, $http, $log, detailDataService, breadCrumbsDataService) {
+            $scope.details = detailDataService.getDetails();
+            $log.log('details loaded: ' + $scope.details);
+            $scope.breadcrumbs = $scope.breadcrumbs + breadCrumbsDataService.getBreadCrumbs();
+            $log.log('scope_breadcrumbs: ' + $scope.breadcrumbs);
+
+        }
+    );

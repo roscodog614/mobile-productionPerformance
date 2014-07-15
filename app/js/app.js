@@ -2,11 +2,11 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module
-    (
-        'myApp',
+angular.module('myApp',
         [
             'ngRoute',
+            'myApp.ng-breadcrumbs',
+            'ui.bootstrap',
             'myApp.filters',
             'myApp.services',
             'myApp.directives',
@@ -19,33 +19,57 @@ angular.module
             '$routeProvider',
             function($routeProvider) {
                 $routeProvider.when
-                (
-                    '/home',
-                    {
+                ('/home', {
                         templateUrl: 'partials/home.html',
-                        controller: 'ngcMain'
+                        controller: 'ngcMain',
+                        label: 'Home'
                     }
                 );
 
                 $routeProvider.when
-                (
-                    '/prodPerfSumm',
-                    {
+                ('/home/prodPerfSumm', {
                         templateUrl: 'partials/prodPerfSumm.html',
-                        controller: 'ngcProdPerfSumm'
+                        controller: 'ngcProdPerfSumm',
+                        label: '| Summary'
                     }
                 );
 
                 $routeProvider.when
-                (
-                    '/prodPerfDetails',
-                    {
+                ('/home/prodPerfSumm/prodPerfDetails', {
                         templateUrl: 'partials/prodPerfDetails.html',
-                        controller: 'ngcProdPerfDetails'
+                        controller: 'ngcProdPerfDetails',
+                        label: '| Details'
                     }
                 );
 
-                $routeProvider.otherwise({ redirectTo: '/home' });
+                $routeProvider.otherwise({ redirectTo: 'home' });
             }
+/*
+            '$stateProvider',
+            '$urlRouterProvider',
+            function($stateProvider, $urlRouterProvider) {
+                $urlRouterProvider.otherwise("/");
+
+                $stateProvider.state('home', {
+                        url: '/home',
+                        templateUrl: 'partials/home.html',
+                        controller: 'ngcMain',
+                    }
+                );
+
+                $stateProvider.state('prodPerfSumm', {
+                        url: '/prodPerfSumm',
+                        templateUrl: 'partials/prodPerfSumm.html',
+                        controller: 'ngcProdPerfSumm',
+                    }
+                );
+                $stateProvider.state('prodPerfDetails', {
+                        url: '/prodPerfDetails',
+                        templateUrl: 'partials/prodPerfDetails.html',
+                        controller: 'ngcProdPerfDetails',
+                    }
+                );
+            }
+*/
         ]
     );

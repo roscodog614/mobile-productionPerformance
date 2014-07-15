@@ -17,15 +17,26 @@ angular.module('myApp.services', [])
                 return resultTickets;
             }
         })
-        .service('detailDataService',
-        function () {
+    .service('detailDataService',
+        function() {
             var resultDetails;
-            this.setDetails = function (details) {
+            this.setDetails = function(details) {
                 resultDetails = details;
             };
 
-            this.getDetails = function () {
+            this.getDetails = function() {
                 return resultDetails;
             }
-        });
+        }
+    )
+    .service('breadCrumbsDataService',
+        function() {
+            var resultBreadCrumbs;
+            this.setBreadCrumbs = function(breadCrumbs) {
+                resultBreadCrumbs = breadCrumbs;
+            };
 
+            this.getBreadCrumbs = function() {
+                return resultBreadCrumbs;
+            }
+        });

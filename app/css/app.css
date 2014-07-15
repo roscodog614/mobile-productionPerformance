@@ -1,26 +1,21 @@
 /* app css stylesheet */
 
-
+h1
+{
+    text-decoration: underline;
+}
 
 ul li
 {
     list-style: none;
-    margin-bottom: 5px;
-    display: table;
-}
-
-h1
-{
-    text-decoration: underline;
 }
 
 label
 {
     float: left;
     clear: left;
-    width: 170px;
+    width: 120px;
     height: 26px;
-    margin-right: 5px;
 }
 
 input
@@ -31,13 +26,17 @@ input
     float: left;
 }
 
+.tblHome {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
 .btnProdPerfHome
 {
     background-color: green;
     color: white;
     font-weight: bold;
-    width: 162.5px;
-    display: table-row-group;
+    width: 125px;
 }
 
 .btnCalendar
@@ -48,7 +47,7 @@ input
 
 .inputCalendar
 {
-    display: inline-block;
+    display: inline;
     width: 120px;
     height: 26px;
     float: left;
@@ -78,4 +77,8 @@ select
 .tblBody tr td
 {
     padding: 2px;
+}
+
+.nav ul li {
+    display: inline;
 }

@@ -1,14 +1,18 @@
-﻿    <div id="divTicetDatePicker" ng-controller="ngcPlants">
-        <div id="divSearch" ng-controller="ngcTicketDatePicker">
-            <ul id="ulPlants">
-                <li>
+﻿<div id="divPlants" ng-controller="ngcPlants">
+    <div id ="div"></div>
+    <table id="tblHome" ng-controller="ngcTicketDatePicker" class="tblHome">
+        <tbody>
+            <tr>
+                <td>
                     <label id="lblPlantName" for="ddlPlants">Plant:</label>
                     <select id="ddlPlants" name="ddlPlants" data-ng-model="ngmPlant"
                             ng-options="plant for plant in plants">
                         <option value="">-- Choose Plants --</option>
                     </select>
-                </li>
-                <li>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <label id="lblTicketDate" for="txtTicketDate">Ticket Date:</label>
                     <input id="txtTicketDate" type="text" class="inputCalendar" ng-model="ngmTicketDate"
                            datepicker-popup="{{format}}" show-weeks="false" is-open="opened" close-text="Close" />
@@ -16,18 +20,57 @@
                     <button id="btnOpenCalendar" type="button" class="btnCalendar" ng-click="open($event)">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
-                </li>
-                <li>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <br />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
                     <button id="btnSearch" name="btnSearch" class="btnProdPerfHome" type="button" ng-model="stuff"
-                            ng-controller="ngcGetPlantTickets" ng-click="tickets(ngmPlant, ngmTicketDate)">
+                            ng-controller="ngcGetPlantTickets" ng-click="tickets(ngmPlant, ngmTicketDate);pushBreadCrumb('#/prodPerfSumm', 'Summary')">
                         Search
                     </button>
                     <button id="btnClear" name="btnClear" class="btnProdPerfHome" type="button"
                             ng-controller="ngcClear" ng-click="clearFilters()">
                         Clear
                     </button>
-                </li>
-            </ul>
-        </div>
-    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--
+        <ul id="ulPlants" ng-controller="ngcTicketDatePicker">
+            <li>
+                <label id="lblPlantName" for="ddlPlants">Plant:</label>
+                <select id="ddlPlants" name="ddlPlants" data-ng-model="ngmPlant"
+                        ng-options="plant for plant in plants">
+                    <option value="">-- Choose Plants --</option>
+                </select>
+            </li>
+            <li>
+                <label id="lblTicketDate" for="txtTicketDate">Ticket Date:</label>
+                <input id="txtTicketDate" type="text" class="inputCalendar" ng-model="ngmTicketDate"
+                       datepicker-popup="{{format}}" show-weeks="false" is-open="opened" close-text="Close" />
+
+                <button id="btnOpenCalendar" type="button" class="btnCalendar" ng-click="open($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </li>
+            <li>
+                <br />
+                <button id="btnSearch" name="btnSearch" class="btnProdPerfHome" type="button" ng-model="stuff"
+                        ng-controller="ngcGetPlantTickets" ng-click="tickets(ngmPlant, ngmTicketDate);pushBreadCrumb('#/prodPerfSumm', 'Summary')">
+                    Search
+                </button>
+                <button id="btnClear" name="btnClear" class="btnProdPerfHome" type="button"
+                        ng-controller="ngcClear" ng-click="clearFilters()">
+                    Clear
+                </button>
+            </li>
+        </ul>
+        -->
+</div>
+</div>
